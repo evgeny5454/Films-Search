@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="image_size">200dp</dimen>
+    <dimen name="margin6">6dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="floating_button_margin">16dp</dimen>
+</resources>
