@@ -1,11 +1,10 @@
 package ru.geekbrains.filmsearch.router
 
-import android.text.TextUtils.replace
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import ru.geekbrains.filmsearch.R
-import ru.geekbrains.filmsearch.ui.FragmentFilmsList
+import ru.geekbrains.filmsearch.ui.list.FragmentFilmsList
 
 class Router(private val fragmentManager: FragmentManager) {
 

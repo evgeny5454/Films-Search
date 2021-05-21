@@ -1,10 +1,11 @@
-package ru.geekbrains.filmsearch.ui
+package ru.geekbrains.filmsearch.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -47,13 +48,11 @@ class FragmentFilmsList : Fragment() {
         filmsList.adapter = adapter
 
         var button: FloatingActionButton = view.findViewById(R.id.floating_button)
+        var toolbar: Toolbar = view.findViewById(R.id.toolbar_list_films)
+        toolbar.setTitle(R.string.app_name)
 
         button.setOnClickListener { it
             Toast.makeText(requireContext(),"Нажата кнопка", Toast.LENGTH_LONG).show()
         }
-
-
-
     }
-
 }
