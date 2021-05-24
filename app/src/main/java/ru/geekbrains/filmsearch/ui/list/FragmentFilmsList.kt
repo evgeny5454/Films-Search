@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.geekbrains.filmsearch.R
 import ru.geekbrains.filmsearch.domain.Film
+import ru.geekbrains.filmsearch.router.Router
+import ru.geekbrains.filmsearch.router.RouterHolder
 
 class FragmentFilmsList : Fragment() {
 
     private var viewModel: FilmListViewModel? = null
     private var adapter = FilmAdapter(this)
+    private var router: Router? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,5 +57,15 @@ class FragmentFilmsList : Fragment() {
         button.setOnClickListener { it
             Toast.makeText(requireContext(),"Нажата кнопка", Toast.LENGTH_LONG).show()
         }
+
+        adapter.setOnFilmClicked { film ->
+            if (activity is Router) {
+                var router = (activity as RouterHolder?)!!.router
+                router.detailFilm(film as Film?)
+            }
+        }
+
+
     }
+
 }

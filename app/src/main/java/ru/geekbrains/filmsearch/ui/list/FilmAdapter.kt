@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toolbar
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.geekbrains.filmsearch.R
@@ -16,6 +14,9 @@ class FilmAdapter(fragmentFilmsList: FragmentFilmsList) : RecyclerView.Adapter<F
 
     private var filmList = ArrayList<Film>()
 
+    var onFilmClicked: OnFilmClicked? = null
+
+
     fun setData(toAdd: List<Film>?) {
         filmList.clear()
         if (toAdd != null) {
@@ -24,8 +25,15 @@ class FilmAdapter(fragmentFilmsList: FragmentFilmsList) : RecyclerView.Adapter<F
     }
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         val view =  LayoutInflater.from(parent.context).inflate(R.layout.item_film, parent, false) as View
+        //var film: Film? = null
+       // view.setOnClickListener  {
+          //  if (film != null) {
+
+           // }
+        //}
         return FilmViewHolder(view)
 
     }
@@ -40,13 +48,23 @@ class FilmAdapter(fragmentFilmsList: FragmentFilmsList) : RecyclerView.Adapter<F
 
         var title:TextView = itemView.findViewById(R.id.title)
         var image:ImageView = itemView.findViewById(R.id.image)
+
+        init {
+            itemView.setOnClickListener{
+                onFilmClicked?.onFilmClicked(filmList[adapterPosition])
+            }
+        }
+
+
     }
 
 
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
 
-        var film: Film = filmList[position]
+        var film =  filmList[position]
+
+
         holder.title.text = film.name
         //holder.toolbar.setTitle(R.string.app_name)
 
@@ -55,6 +73,16 @@ class FilmAdapter(fragmentFilmsList: FragmentFilmsList) : RecyclerView.Adapter<F
             .centerCrop()
             .into(holder.image)
 
+
+
+    }
+
+    interface OnFilmClicked {
+        fun onFilmClicked(film: Film?)
+    }
+
+    fun setOnFilmClicked(film: Film) {
+        this.onFilmClicked = onFilmClicked
     }
 }
 
