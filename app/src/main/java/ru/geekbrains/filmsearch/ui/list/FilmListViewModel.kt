@@ -1,4 +1,4 @@
-package ru.geekbrains.filmsearch.ui
+package ru.geekbrains.filmsearch.ui.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

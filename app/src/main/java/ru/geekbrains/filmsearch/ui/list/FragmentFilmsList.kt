@@ -1,10 +1,11 @@
-package ru.geekbrains.filmsearch.ui
+package ru.geekbrains.filmsearch.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.geekbrains.filmsearch.R
 import ru.geekbrains.filmsearch.domain.Film
+import ru.geekbrains.filmsearch.router.Router
+import ru.geekbrains.filmsearch.router.RouterHolder
 
 class FragmentFilmsList : Fragment() {
 
     private var viewModel: FilmListViewModel? = null
     private var adapter = FilmAdapter(this)
+    private var router: Router? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,11 +51,19 @@ class FragmentFilmsList : Fragment() {
         filmsList.adapter = adapter
 
         var button: FloatingActionButton = view.findViewById(R.id.floating_button)
+        var toolbar: Toolbar = view.findViewById(R.id.toolbar_list_films)
+        toolbar.setTitle(R.string.app_name)
 
         button.setOnClickListener { it
             Toast.makeText(requireContext(),"Нажата кнопка", Toast.LENGTH_LONG).show()
         }
 
+        adapter.setOnFilmClicked { film ->
+            if (activity is Router) {
+                var router = (activity as RouterHolder?)!!.router
+                router.detailFilm(film as Film?)
+            }
+        }
 
 
     }
